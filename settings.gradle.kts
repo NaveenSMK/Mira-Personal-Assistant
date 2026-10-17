@@ -1,7 +1,4 @@
-pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories { google(); mavenCentral() }
+plugins {
+    id("com.android.application") version "8.10.1" apply false
+    id("org.jetbrains.kotlin.android") version "2.4.21" apply false
 }
-rootProject.name = "VoiceFirstAssistant"
-include(":app")
