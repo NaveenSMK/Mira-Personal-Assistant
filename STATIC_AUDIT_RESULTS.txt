@@ -1,0 +1,23 @@
+PASS | Manifest XML parses
+PASS | Android backup disabled
+PASS | Cleartext traffic disabled
+PASS | Only launcher activity is exported
+PASS | Tool registry is nonempty
+PASS | Every registered tool has a dispatch/validation reference
+PASS | Confirmation policy: phone.dial_contact
+PASS | Confirmation policy: calendar.create
+PASS | Confirmation policy: gmail.search_unread
+PASS | Confirmation policy: gmail.create_draft
+PASS | Confirmation policy: memory.forget
+PASS | Tool loop bounded
+PASS | Model inference timeout configured
+PASS | Tool execution timeout configured
+PASS | No forbidden dynamic execution: Runtime.getRuntime().exec
+PASS | No forbidden dynamic execution: ProcessBuilder(
+PASS | No forbidden dynamic execution: DexClassLoader
+PASS | No forbidden dynamic execution: ScriptEngineManager
+PASS | No forbidden dynamic execution: eval(
+PASS | Model unload is suspend/serialized
+PASS | Coarse delimiter balance
+
+21/21 checks passed
