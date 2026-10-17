@@ -31,8 +31,7 @@ jobs:
       - name: Ensure Gradle Wrapper is Executable
         run: |
           if [ ! -f "gradlew" ]; then
-            echo "Generating Gradle wrapper..."
-            gradle wrapper --gradle-version 8.10.1
+            gradle wrapper --gradle-version 8.11.1
           fi
           chmod +x gradlew
 
