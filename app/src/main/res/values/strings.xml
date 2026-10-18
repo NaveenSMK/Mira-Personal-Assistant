@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mira_accessibility_description">Allows MIRA to perform permitted on-screen actions when requested. Sensitive screens require manual handling.</string>
+</resources>
