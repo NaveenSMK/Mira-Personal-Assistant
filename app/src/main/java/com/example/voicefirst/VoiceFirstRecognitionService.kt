@@ -44,6 +44,9 @@ class VoiceFirstRecognitionService : RecognitionService() {
                     override fun onRmsChanged(rmsdB: Float) { listener.rmsChanged(rmsdB) }
                     override fun onBufferReceived(buffer: ByteArray?) { if (buffer != null) listener.bufferReceived(buffer) }
                     override fun onEndOfSpeech() { listener.endOfSpeech() }
+                    override fun onEvent(eventType: Int,params:Bundle?){
+                        //No Additional handling needed
+                    }
                     override fun onError(error: Int) {
                         listener.error(error)
                         destroyFor(listener)
