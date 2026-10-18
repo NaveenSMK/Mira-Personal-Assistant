@@ -29,6 +29,10 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v4
 
+      - name: Install Android 16 SDK packages
+        shell: bash
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
@@ -41,6 +45,14 @@ jobs:
             gradle wrapper --gradle-version 8.11.1
           fi
           chmod +x ./gradlew
+
+      - name: Run source safety audits
+        run: |
+          python tools/static_audit.py
+          python tools/security_audit.py
+
+      - name: Run unit tests and Android Lint
+        run: ./gradlew testDebugUnitTest lintDebug --stacktrace
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug --stacktrace
