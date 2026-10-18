@@ -1,0 +1,113 @@
+# MIRA Source Validation Results — 2026-10-18
+
+## Static source audit
+
+```text
+PASS | Manifest XML parses
+PASS | Android backup disabled
+PASS | Cleartext traffic disabled
+PASS | Only launcher activity is exported
+PASS | Exported services are protected by Android binding permissions
+PASS | Tool registry is nonempty
+PASS | Every registered tool has a dispatch/validation reference
+PASS | Confirmation policy: phone.dial_contact
+PASS | Confirmation policy: calendar.create
+PASS | Confirmation policy: gmail.search_unread
+PASS | Confirmation policy: gmail.create_draft
+PASS | Confirmation policy: memory.forget
+PASS | Tool loop bounded
+PASS | Model inference timeout configured
+PASS | Tool execution timeout configured
+PASS | No forbidden dynamic execution: Runtime.getRuntime().exec
+PASS | No forbidden dynamic execution: ProcessBuilder(
+PASS | No forbidden dynamic execution: DexClassLoader
+PASS | No forbidden dynamic execution: ScriptEngineManager
+PASS | No forbidden dynamic execution: eval(
+PASS | Model unload is suspend/serialized
+PASS | Default assistant service is declared
+PASS | Assist text callback implemented
+PASS | Assistant session service is declared
+PASS | Recognition service metadata is present
+PASS | Screen context is bounded
+PASS | Screen context has clear operation
+PASS | Screen text treated as untrusted prompt data
+PASS | Assist capture skips password, PIN, OTP, and recovery hints
+PASS | Accessibility service declared with XML configuration
+PASS | Accessibility XML parses
+PASS | Accessibility service does not inject gestures
+PASS | Accessibility tree retrieval is limited to user-enabled service
+PASS | All main manifest/resource XML files parse
+PASS | Financial app policy fails to manual handoff
+PASS | Password fields trigger checkpoint
+PASS | Editable field values are not read by policy
+PASS | Restricted submit/send/financial labels are blocked
+PASS | UI command expires
+PASS | UI text target is exact and unique
+PASS | No arbitrary intents or gesture capability in controller
+PASS | Credential-bearing commands rejected before display and task persistence
+PASS | Credential-like payloads blocked at agent and service entry boundaries
+PASS | Tool history is bounded and omits raw argument payloads
+PASS | Accessibility policy regression tests present
+PASS | Play submission target API is 36
+PASS | Model import is persisted in private storage
+PASS | Saved model restore is attempted at startup
+PASS | Main screens apply system-bar insets
+PASS | MIRA launcher and adaptive icon resources exist
+PASS | Browser, YouTube, Maps, and call routing regression tests exist
+PASS | Call permission is declared but call-log permission is not
+PASS | Release workflow requires publisher signing secrets
+PASS | Coarse delimiter balance
+
+54/54 checks passed
+```
+
+## Security source audit
+
+```text
+PASS screen store does not retain Bitmap
+PASS screen context TTL
+PASS bounded context
+PASS sanitizer present
+PASS credential filtering present
+PASS approval defense in depth
+PASS untrusted screen/OCR prompt
+PASS sanitizer tests present
+PASS assist context skips pin/passcode hints
+PASS backup disabled
+PASS accessibility service requires OS binding permission
+PASS financial app checkpoint policy
+PASS restricted target labels blocked
+PASS UI actions expire
+PASS UI automation not given gesture injection
+PASS credential commands rejected before storage
+PASS credential-like entered payloads blocked
+PASS bounded tool history omits raw action arguments
+PASS credential policy unit tests
+19/19 source checks passed
+```
+
+## Kotlin intent-parser smoke tests
+
+```text
+PASS | open browser and search for Cricbuzz | expected=(WEB_SEARCH, Cricbuzz) | got=ParsedAndroidIntent(action=WEB_SEARCH, query=Cricbuzz)
+PASS | open browser and do a search for Cricbuzz | expected=(WEB_SEARCH, Cricbuzz) | got=ParsedAndroidIntent(action=WEB_SEARCH, query=Cricbuzz)
+PASS | search for Cricbuzz | expected=(WEB_SEARCH, Cricbuzz) | got=ParsedAndroidIntent(action=WEB_SEARCH, query=Cricbuzz)
+PASS | search the web for Cricbuzz | expected=(WEB_SEARCH, Cricbuzz) | got=ParsedAndroidIntent(action=WEB_SEARCH, query=Cricbuzz)
+PASS | open browser | expected=(OPEN_BROWSER, ) | got=ParsedAndroidIntent(action=OPEN_BROWSER, query=)
+PASS | open YouTube app | expected=(OPEN_YOUTUBE, ) | got=ParsedAndroidIntent(action=OPEN_YOUTUBE, query=)
+PASS | open YouTube app and search for Tamil songs | expected=(YOUTUBE_SEARCH, Tamil songs) | got=ParsedAndroidIntent(action=YOUTUBE_SEARCH, query=Tamil songs)
+PASS | search maps for petrol stations | expected=(MAPS_SEARCH, petrol stations) | got=ParsedAndroidIntent(action=MAPS_SEARCH, query=petrol stations)
+PASS | open contacts and search for wife | expected=(CONTACT_SEARCH, wife) | got=ParsedAndroidIntent(action=CONTACT_SEARCH, query=wife)
+PASS | call my wife | expected=(CALL_CONTACT, wife) | got=ParsedAndroidIntent(action=CALL_CONTACT, query=wife)
+PASS | Please make a call to my wife | expected=(CALL_CONTACT, wife) | got=ParsedAndroidIntent(action=CALL_CONTACT, query=wife)
+PASS | Could you search for Cricbuzz | expected=(WEB_SEARCH, Cricbuzz) | got=ParsedAndroidIntent(action=WEB_SEARCH, query=Cricbuzz)
+PASS | set a timer for 5 minutes | expected=(SET_TIMER, set a timer for 5 minutes) | got=ParsedAndroidIntent(action=SET_TIMER, query=set a timer for 5 minutes)
+PASS | start timer for 10 seconds | expected=(SET_TIMER, start timer for 10 seconds) | got=ParsedAndroidIntent(action=SET_TIMER, query=start timer for 10 seconds)
+PASS | set an alarm for 6:30 AM | expected=(SET_ALARM, set an alarm for 6:30 AM) | got=ParsedAndroidIntent(action=SET_ALARM, query=set an alarm for 6:30 AM)
+PASS | wake me at 7 AM | expected=(SET_ALARM, wake me at 7 AM) | got=ParsedAndroidIntent(action=SET_ALARM, query=wake me at 7 AM)
+16/16 passed
+```
+
+## Build limitation
+
+NOT RUN: full Android Gradle build, Android unit tests, Android Lint, APK/AAB build, or physical-device tests. This environment has no Android SDK/android.jar, no Gradle executable, and no Gradle wrapper JAR. The GitHub Actions workflows provision those tools and are the next required validation gate. Source audits and the isolated parser smoke test do not prove the Android app compiles or that runtime interactions are fixed.
