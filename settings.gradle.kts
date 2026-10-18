@@ -1,7 +1,20 @@
-pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories { google(); mavenCentral() }
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
 }
-rootProject.name = "VoiceFirstAssistant"
+
+dependencyResolutionManagement {
+    repositoriesMode.set(
+        RepositoriesMode.FAIL_ON_PROJECT_REPOS
+    )
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "Mira-Personal-Assistant"
 include(":app")
