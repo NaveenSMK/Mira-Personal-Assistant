@@ -214,7 +214,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             setPadding(dp(18), dp(18), dp(18), dp(18))
             minHeight = dp(220)
         }
-        outputScroll.addView(response, ScrollView.LayoutParams(-1, -2))
+        outputScroll.addView(response, android.widget.FrameLayout.LayoutParams(-1, -2))
         root.addView(outputScroll, LinearLayout.LayoutParams(-1, 0, 1f).apply { bottomMargin = dp(14) })
 
         val composer = LinearLayout(this).apply {
