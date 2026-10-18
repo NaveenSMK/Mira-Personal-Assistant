@@ -632,7 +632,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun handleScreenContextLaunch(intent: Intent?) {
         if (intent?.getBooleanExtra(EXTRA_OPEN_SCREEN_CONTEXT, false) == true) {
             val captured = ScreenContextStore.snapshotText()
-            transcript.text = "Current screen context"
+            transcript.setText("Current screen context")
             response.text = if (captured.isBlank()) {
                 "MIRA was opened, but Android did not provide readable screen text. The app may block assist capture."
             } else {
@@ -819,7 +819,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         // Do not display or persist a request that appears to contain credentials or verification codes.
         // The user should enter these directly in the target app, not say them to MIRA.
         if (AppSafetyPolicy.looksLikeCredentialAutomationRequest(text)) {
-            transcript.text = "[Credential-bearing request withheld]"
+            transcript.setText("[Credential-bearing request withheld]")
             val message = "I won't receive or automate passwords, PINs, OTPs, or recovery codes. Please enter credentials directly in the app."
             response.text = message
             status.text = "Credential handoff required"
@@ -828,7 +828,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         if (text.length > 4_000) {
-            transcript.text = "[Request over length limit]"
+            transcript.setText("[Request over length limit]")
             val message = "That request is too long. Please keep it under 4,000 characters."
             response.text = message
             status.text = "Request too long"
