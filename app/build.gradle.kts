@@ -13,6 +13,9 @@ android {
     namespace = "com.naveensmk.mira"
     compileSdk = 36
 
+    buildFeatures {
+        buildConfig=true
+    }
     defaultConfig {
         applicationId = "com.naveensmk.mira"
         minSdk = 26
