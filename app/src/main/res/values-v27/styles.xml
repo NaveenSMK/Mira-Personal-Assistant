@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- API 27+ only: windowLightNavigationBar is unavailable on API 26. -->
+    <style name="Theme.Mira" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/mira_sky</item>
+        <item name="colorPrimaryVariant">@color/mira_sky_dark</item>
+        <item name="colorSecondary">@color/mira_sky_dark</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/mira_background</item>
+        <item name="android:navigationBarColor">@color/mira_background</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowBackground">@color/mira_background</item>
+        <item name="android:colorAccent">@color/mira_sky_dark</item>
+    </style>
+</resources>

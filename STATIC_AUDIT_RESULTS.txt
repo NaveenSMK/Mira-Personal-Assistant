@@ -1,0 +1,109 @@
+# MIRA Source Validation Results — 2026-10-18
+
+## Static source audit
+
+```text
+PASS | Manifest XML parses
+PASS | Android backup disabled
+PASS | Cleartext traffic disabled
+PASS | Only launcher activity is exported
+PASS | Exported services are protected by Android binding permissions
+PASS | Tool registry is nonempty
+PASS | Every registered tool has a dispatch/validation reference
+PASS | Confirmation policy: phone.dial_contact
+PASS | Confirmation policy: calendar.create
+PASS | Confirmation policy: gmail.search_unread
+PASS | Confirmation policy: gmail.create_draft
+PASS | Confirmation policy: memory.forget
+PASS | Tool loop bounded
+PASS | Model inference timeout configured
+PASS | Tool execution timeout configured
+PASS | No forbidden dynamic execution: Runtime.getRuntime().exec
+PASS | No forbidden dynamic execution: ProcessBuilder(
+PASS | No forbidden dynamic execution: DexClassLoader
+PASS | No forbidden dynamic execution: ScriptEngineManager
+PASS | No forbidden dynamic execution: eval(
+PASS | Model unload is suspend/serialized
+PASS | Default assistant service is declared
+PASS | Assist text callback implemented
+PASS | Assistant session service is declared
+PASS | Recognition service metadata is present
+PASS | Screen context is bounded
+PASS | Screen context has clear operation
+PASS | Screen text treated as untrusted prompt data
+PASS | Assist capture skips password, PIN, OTP, and recovery hints
+PASS | Accessibility service declared with XML configuration
+PASS | Accessibility XML parses
+PASS | Accessibility service does not inject gestures
+PASS | Accessibility tree retrieval is limited to user-enabled service
+PASS | All main manifest/resource XML files parse
+PASS | Financial app policy fails to manual handoff
+PASS | Password fields trigger checkpoint
+PASS | Editable field values are not read by policy
+PASS | Restricted submit/send/financial labels are blocked
+PASS | UI command expires
+PASS | UI text target is exact and unique
+PASS | No arbitrary intents or gesture capability in controller
+PASS | Credential-bearing commands rejected before display and task persistence
+PASS | Credential-like payloads blocked at agent and service entry boundaries
+PASS | Tool history is bounded and omits raw argument payloads
+PASS | Accessibility policy regression tests present
+PASS | Play submission target API is 36
+PASS | Model import is persisted in private storage
+PASS | Saved model restore is attempted at startup
+PASS | Main screens apply system-bar insets
+PASS | MIRA launcher and adaptive icon resources exist
+PASS | Browser, YouTube, Maps, and call routing regression tests exist
+PASS | Calls use user-confirmed dialer without direct-call or call-log permissions
+PASS | Accessibility consent gate and revoke path are present
+PASS | Gmail local disconnect is implemented and exposed
+PASS | Task store no longer receives raw request text
+PASS | Task and memory SQLite operations dispatch to IO
+PASS | Screen capture retains assist text and isolates OCR generations
+PASS | Process-scoped model owner prevents Activity-bound duplicate engine
+PASS | Unavailable GGUF runtime is not advertised
+PASS | Inference output size is bounded
+PASS | Release workflow requires publisher signing secrets
+PASS | Coarse delimiter balance
+
+62/62 checks passed
+```
+
+## Security source audit
+
+```text
+PASS screen store does not retain Bitmap
+PASS screen context TTL
+PASS bounded context
+PASS sanitizer present
+PASS credential filtering present
+PASS approval defense in depth
+PASS untrusted screen/OCR prompt
+PASS sanitizer tests present
+PASS assist context skips pin/passcode hints
+PASS backup disabled
+PASS accessibility service requires OS binding permission
+PASS financial app checkpoint policy
+PASS restricted target labels blocked
+PASS UI actions expire
+PASS UI automation not given gesture injection
+PASS credential commands rejected before storage
+PASS credential-like entered payloads blocked
+PASS bounded tool history omits raw action arguments
+PASS credential policy unit tests
+19/19 source checks passed
+```
+
+## Pure Kotlin routing/context smoke
+
+```text
+PASS: 12 pure Kotlin routing/context assertions
+```
+
+## Kotlin source syntax smoke
+
+The full-source `kotlinc` attempt reported **0 syntax-pattern diagnostics**, but could not compile the Android project because Android SDK, AndroidX, LiteRT-LM, OkHttp, JSON, and coroutine dependencies are absent. This is not a successful Android/Kotlin build.
+
+## Build limitation
+
+NOT RUN: Gradle build, Android unit tests, Android Lint, APK/AAB packaging, emulator tests, or physical-device tests. No Android SDK, `android.jar`, Gradle executable, or `gradle-wrapper.jar` is present in this preparation environment. GitHub Actions is configured to provision Gradle 8.14.4 and generate the wrapper before building. CI and device results remain required before release.

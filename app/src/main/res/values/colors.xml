@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mira_sky">#0679B1</color>
+    <color name="mira_sky_dark">#006A9A</color>
+    <color name="mira_surface">#FFFFFF</color>
+    <color name="mira_background">#F3F9FD</color>
+    <color name="mira_ink">#123047</color>
+    <color name="mira_muted">#536B7A</color>
+    <color name="mira_border">#D5E8F4</color>
+</resources>
