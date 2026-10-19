@@ -2,10 +2,13 @@ name: Build MIRA Android APK
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
-  workflow_dispatch: # Allows manual trigger from the GitHub Actions tab
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -20,21 +23,37 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'temurin'
-          cache: 'gradle'
+          distribution: temurin
+          cache: gradle
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
 
-      - name: Ensure Gradle Wrapper is Executable
+      - name: Install Android 16 SDK packages
+        shell: bash
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.14.4'
+
+      - name: Ensure Gradle Wrapper Exists
+        shell: bash
         run: |
-          if [ ! -f "gradlew" ]; then
-            echo "Generating Gradle wrapper..."
-            gradle wrapper --gradle-version 8.10.1
-          fi
-          chmod +x gradlew
+          # Always align the checked-out wrapper with the Gradle version provisioned above.
+          gradle wrapper --gradle-version 8.14.4
+          chmod +x ./gradlew
 
-      - name: Build Debug APK with Gradle
+      - name: Run source safety audits
+        run: |
+          python tools/static_audit.py
+          python tools/security_audit.py
+
+      - name: Run unit tests and Android Lint
+        run: ./gradlew testDebugUnitTest lintDebug --stacktrace
+
+      - name: Build Debug APK
         run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload Debug APK Artifact
